@@ -16,28 +16,36 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+    /* Login user */
+    Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/login', [AuthController::class, 'login']);
 
-  
-Route::middleware(['api.auth'])->group(function () {
+    Route::group(['middleware' => ['auth:sanctum']], function(){
 
-/* Query customers */
-Route::get('/user', [ClientController::class, 'indexClient']);
+        /* USERS */
+        
+        /** Delet Cookie by user */
+        Route::get('/logout', [AuthController::class, 'logout']);
+        /* Add user in database */
+        Route::post('/register', [AuthController::class, 'register']);
 
-/* Query customer by id */
-Route::get('/user/{id}', [ClientController::class, 'showClient']);
 
-/* Save customer */
-Route::post('/store-client', [ClientController::class, 'storeClient']);
+        /* CLIENTS */
+        
+        /* Query customers */
+        Route::get('/user', [ClientController::class, 'indexClient']);
+        /* Query customer by id */
+        Route::get('/user/{id}', [ClientController::class, 'showClient']);
+        /* Save customer */
+        Route::post('/store-client', [ClientController::class, 'storeClient']);
+        /* Update customer by id */
+        Route::put('/update-client/{id}', [ClientController::class, 'updateClient']);
+        /* Delet customer by id */
+        Route::delete('/delete-client/{id}', [ClientController::class, 'deleteClient']);
 
-/* Update customer by id */
-Route::put('/update-client/{id}', [ClientController::class, 'updateClient']);
+    });
 
-/* Delet customer by id */
-Route::delete('/delete-client/{id}', [ClientController::class, 'deleteClient']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
-});
+
+
