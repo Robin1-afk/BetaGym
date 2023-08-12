@@ -63,7 +63,7 @@ class ClientController extends Controller
             return response()->json(['message' => 'Successful registration', 'data' => $client], 200);
 
         } catch (QueryException $e) {
-            return response()->json(['message' => 'Error in Query: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'Error in Querys: ' . $e->getMessage()], 500);
         }
     }
 
