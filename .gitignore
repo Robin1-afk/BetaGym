@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/Gimnasio-APP/
 .env
 .env.backup
 .env.production
